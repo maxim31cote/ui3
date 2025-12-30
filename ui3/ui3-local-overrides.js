@@ -4,16 +4,11 @@
 (function() {
     'use strict';
 
-    console.log('🎨 UI3 Local Overrides - Material Design 3 Mobile');
-
-    // Wait for UI3 to be fully initialized
+    console.log('🎨 UI3 Local Overrides - CHARGÉ - Version Simplifiée');
+    
+    // Force init immediately without waiting for ui3.initialized
     function initMobileOverrides() {
-        console.log('⏳ Tentative d\'initialisation... ui3:', typeof ui3, 'initialized:', typeof ui3 !== 'undefined' ? ui3.initialized : 'undefined');
-        
-        if (typeof ui3 === 'undefined' || !ui3.initialized) {
-            setTimeout(initMobileOverrides, 100);
-            return;
-        }
+        console.log('🚀 Init forcé - Lancement immédiat!');
 
         console.log('✅ UI3 initialisé - Activation des améliorations mobiles');
 
@@ -246,17 +241,8 @@ console.log('🔨 createGroupSelector appelé');
         console.log('✅ Optimisations mobiles activées');
     }
 
-    // Start initialization
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMobileOverrides);
-    } else {
-        initMobileOverrides();
-    }
-    
-    // Also try after a delay as backup
-    setTimeout(function() {
-        console.log('🔄 Backup init après 2 secondes');
-        initMobileOverrides();
-    }, 2000);
+    // Start immediately - no waiting
+    console.log('⚡ Démarrage immédiat dans 500ms');
+    setTimeout(initMobileOverrides, 500);
 
 })();
