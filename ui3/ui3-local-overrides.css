@@ -245,13 +245,44 @@
   display: none !important;
 }
 
-/* Hide left sidebar by default, but show for clips/timeline */
+/* Hide left sidebar by default */
 .portrait #layoutleft {
   display: none !important;
 }
 
-/* Show sidebar in full screen when viewing clips or timeline */
-.portrait body:not(.liveView) #layoutleft {
+/* In clips view: show cameras on top, recordings list at bottom */
+.portrait body.clipsView #cameras {
+  display: grid !important;
+  position: fixed !important;
+  top: 28px !important; /* Below status bar */
+  left: 0 !important;
+  right: 0 !important;
+  height: 40vh !important; /* Top 40% of screen */
+  z-index: 100 !important;
+  overflow-y: auto !important;
+}
+
+.portrait body.clipsView #layoutleftRecordings {
+  display: block !important;
+  position: fixed !important;
+  top: calc(28px + 40vh) !important; /* Below cameras */
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 80px !important; /* Above bottom nav */
+  z-index: 101 !important;
+  background: var(--md-sys-color-surface) !important;
+  overflow-y: auto !important;
+  padding: 8px !important;
+}
+
+/* Hide other layoutleft sections in clips view */
+.portrait body.clipsView #layoutleftLive,
+.portrait body.clipsView #layoutleftExport {
+  display: none !important;
+}
+
+/* Show sidebar in full screen for timeline */
+.portrait body.timelineView #layoutleft {
   display: block !important;
   position: fixed !important;
   top: 28px !important; /* Below status bar */
@@ -262,6 +293,10 @@
   height: auto !important;
   z-index: 9999 !important;
   background: var(--md-sys-color-surface) !important;
+}
+
+.portrait body.timelineView #cameras {
+  display: none !important;
 }
 
 /* Always hide PTZ controls in portrait */
@@ -290,6 +325,16 @@
    MATERIAL DESIGN ENHANCEMENTS
    ============================================ */
 
+/* Recordings list controls */
+.portrait #layoutLeftRecordingsControls {
+  background: var(--md-sys-color-surface-container) !important;
+  padding: 8px !important;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
 /* Clip tiles as Material cards */
 .portrait .cliptile,
 .portrait .datetile {
@@ -317,10 +362,7 @@
 /* ============================================
    CAMERA GRID - FRIGATE STYLE
    ============================================ */
-/* Hide camera grid when viewing clips/timeline */
-.portrait body:not(.liveView) #cameras {
-  display: none !important;
-}
+
 /* Camera grid container */
 .portrait #cameras {
   display: grid !important;
