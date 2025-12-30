@@ -209,9 +209,13 @@
                         menuBtn.click();
                     }
                 } else {
-                    var ui3Tab = document.getElementById('topbar_tab_' + tabName);
+                    // UI3 uses .topbar_tab[name="X"] for tabs
+                    var ui3Tab = document.querySelector('.topbar_tab[name="' + tabName + '"]');
                     if (ui3Tab) {
                         ui3Tab.click();
+                        console.log('✅ Click sur .topbar_tab[name="' + tabName + '"]');
+                    } else {
+                        console.log('❌ Élément non trouvé: .topbar_tab[name="' + tabName + '"]');
                     }
                 }
             });
