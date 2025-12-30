@@ -83,6 +83,41 @@
 }
 
 /* ============================================
+   GROUP SELECTOR (Top Right)
+   ============================================ */
+
+.portrait #group-selector {
+  position: fixed;
+  top: 36px;
+  right: 12px;
+  z-index: 9998;
+  background: var(--md-sys-color-surface-container);
+  border-radius: 20px;
+  padding: 8px 12px;
+  box-shadow: var(--android-elevation-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  transition: var(--android-transition);
+}
+
+.portrait #group-selector svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.portrait #group-selector:active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  transform: scale(0.95);
+}
+
+/* ============================================
    BOTTOM NAVIGATION
    ============================================ */
 
@@ -168,11 +203,16 @@
 
 .portrait #layoutmain {
   padding-bottom: 88px !important;
-  padding-top: 0 !important;
+  padding-top: 36px !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
 }
 
 .portrait #contentWrapper {
-  padding-top: 0 !important;
+  padding: 8px !important;
+  margin: 0 !important;
 }
 
 /* ============================================
@@ -181,6 +221,11 @@
 
 /* Hide top bar tabs in portrait */
 .portrait #layouttop {
+  display: none !important;
+}
+
+/* Hide left sidebar completely (PTZ, controls, etc.) */
+.portrait #layoutleft {
   display: none !important;
 }
 
@@ -223,12 +268,58 @@
 
 /* Buttons Material Design style */
 .portrait button,
-.portrait .button {
-  border-radius: var(--android-border-radius);
-  transition: var(--android-transition);
+.po============================================
+   CAMERA GRID - FRIGATE STYLE
+   ============================================ */
+
+/* Camera grid container */
+.portrait #cameras {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 8px !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 /* Camera tiles */
+.portrait .cameraBox {
+  border-radius: 12px !important;
+  background: var(--md-sys-color-surface-container) !important;
+  border: 1px solid var(--md-sys-color-outline-variant) !important;
+  box-shadow: var(--android-elevation-1) !important;
+  overflow: hidden !important;
+  aspect-ratio: 16/9 !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.portrait .cameraBox img,
+.portrait .cameraBox canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Camera labels in overlay */
+.portrait .cameraBox .cameraLabel {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+  padding: 8px 6px 4px 6px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+}
+
+/* Hide camera numbers/icons cluttering the view */
+.portrait .cameraBox .cameraNumber,
+.portrait .cameraBox .cameraIcon {
+  display: none !important
 .portrait .cameraBox {
   border-radius: var(--android-border-radius);
   background: var(--md-sys-color-surface-container);

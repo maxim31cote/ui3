@@ -24,6 +24,9 @@
         // Create system status bar
         createSystemStatusBar();
 
+        // Create group selector
+        createGroupSelector();
+
         // Create bottom navigation
         createBottomNavigation();
 
@@ -96,6 +99,38 @@
             }
             recordingEl.textContent = recording > 0 ? recording : '—';
         }
+    }
+
+    // Create group selector button (top right)
+    function createGroupSelector() {
+        if (document.getElementById('group-selector')) {
+            return; // Already exists
+        }
+
+        var selector = document.createElement('div');
+        selector.id = 'group-selector';
+        
+        selector.innerHTML = 
+            '<svg viewBox="0 0 24 24">' +
+                '<path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/>' +
+            '</svg>' +
+            '<span id="group-selector-text">Toutes</span>';
+        
+        document.body.appendChild(selector);
+        
+        // Click handler - open camera list
+        selector.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Simulate clicking on system name to open camera list
+            var systemName = document.getElementById('systemnamewrapper');
+            if (systemName) {
+                systemName.click();
+            }
+        });
+        
+        console.log('✅ Sélecteur de groupe créé');
     }
 
     // Create bottom navigation bar
