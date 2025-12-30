@@ -16,10 +16,18 @@
         console.log('✅ UI3 initialisé - Activation des améliorations mobiles');
 
         // Only apply mobile enhancements in portrait mode
-        if (!window.matchMedia('(orientation: portrait)').matches) {
+        var isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        console.log('📱 Détection orientation - Portrait:', isPortrait, 'Width:', window.innerWidth, 'Height:', window.innerHeight);
+        
+        if (!isPortrait) {
             console.log('ℹ️ Mode paysage détecté - améliorations mobiles désactivées');
             return;
         }
+        
+        // Force add portrait class to body
+        document.body.classList.add('portrait');
+        document.documentElement.classList.add('portrait');
+        console.log('✅ Classes portrait ajoutées');
 
         // Create system status bar
         createSystemStatusBar();
@@ -36,7 +44,10 @@
 
     // Create system status bar at top
     function createSystemStatusBar() {
+        console.log('🔨 createSystemStatusBar appelé');
+        
         if (document.getElementById('system-status-bar')) {
+            console.log('⚠️ Status bar existe déjà');
             return; // Already exists
         }
 
@@ -100,7 +111,10 @@
             recordingEl.textContent = recording > 0 ? recording : '—';
         }
     }
-
+console.log('🔨 createGroupSelector appelé');
+        
+        if (document.getElementById('group-selector')) {
+            console.log('⚠️ Group selector existe déjà');
     // Create group selector button (top right)
     function createGroupSelector() {
         if (document.getElementById('group-selector')) {
@@ -129,7 +143,10 @@
                 systemName.click();
             }
         });
+        console.log('🔨 createBottomNavigation appelé');
         
+        if (document.querySelector('.mobile-bottom-nav')) {
+            console.log('⚠️ Bottom nav existe déjà');
         console.log('✅ Sélecteur de groupe créé');
     }
 
