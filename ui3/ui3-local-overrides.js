@@ -19,11 +19,130 @@
         // Créer les éléments nécessaires
         createPTZElements();
         
+        // Créer la barre d'infos serveur
+        createServerInfoBar();
+        
         // Attacher les événements
         attachEvents();
         
         // Surveiller les changements de caméra pour afficher/masquer le bouton PTZ
         setupCameraChangeObserver();
+        
+        // Mettre à jour les infos serveur
+        updateServerInfo();
+        setInterval(updateServerInfo, 2000); // Mise à jour toutes les 2 secondes
+    }
+    
+    /**
+     * Créer la barre d'infos serveur en haut
+     */
+    function createServerInfoBar() {
+        const infoBar = document.createElement('div');
+        infoBar.id = 'mobileServerInfo';
+        infoBar.innerHTML = `
+            <div class="mobileServerInfoSystem">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                </svg>
+            </div>
+            <div class="mobileServerInfoItem">
+                <div class="mobileServerInfoLabel">CPU</div>
+                <div class="mobileServerInfoValue" id="mobileCpuValue">--</div>
+            </div>
+            <div class="mobileServerInfoItem">
+                <div class="mobileServerInfoLabel">MEM</div>
+                <div class="mobileServerInfoValue" id="mobileMemValue">--</div>
+            </div>
+            <div class="mobileServerInfoItem">
+                <div class="mobileServerInfoLabel">DISK</div>
+                <div class="mobileServerInfoValue" id="mobileDiskValue">--</div>
+            </div>
+            <div class="mobileServerInfoItem">
+                <div class="mobileServerInfoLabel">FPS</div>
+                <div class="mobileServerInfoValue good" id="mobileFpsValue">--</div>
+            </div>
+        `;
+        
+        document.body.insertBefore(infoBar, document.body.firstChild);
+        console.log('✅ Barre d\'infos serveur créée');
+    }
+    
+    /**
+     * Mettre à jour les infos serveur
+     */
+    function updateServerInfo() {
+        if (!document.body.classList.contains('portrait')) return;
+        
+        // Récupérer les infos depuis l'interface UI3 existante
+        try {
+            // CPU
+            const cpuElement = document.querySelector('#serverStatus .cpuUsage, [title*="CPU"]');
+            if (cpuElement) {
+                const cpuText = cpuElement.textContent || cpuElement.innerText;
+                const cpuMatch = cpuText.match(/(\d+)%?/);
+                if (cpuMatch) {
+                    const cpuValue = parseInt(cpuMatch[1]);
+                    const cpuEl = document.getElementById('mobileCpuValue');
+                    if (cpuEl) {
+                        cpuEl.textContent = cpuValue + '%';
+                        cpuEl.className = 'mobileServerInfoValue ' + (cpuValue > 80 ? 'error' : cpuValue > 60 ? 'warning' : 'good');
+                    }
+                }
+            }
+            
+            // MEM
+            const memElement = document.querySelector('#serverStatus .memUsage, [title*="Memory"]');
+            if (memElement) {
+                const memText = memElement.textContent || memElement.innerText;
+                const memMatch = memText.match(/(\d+)%?/);
+                if (memMatch) {
+                    const memValue = parseInt(memMatch[1]);
+                    const memEl = document.getElementById('mobileMemValue');
+                    if (memEl) {
+                        memEl.textContent = memValue + '%';
+                        memEl.className = 'mobileServerInfoValue ' + (memValue > 85 ? 'error' : memValue > 70 ? 'warning' : 'good');
+                    }
+                }
+            }
+            
+            // DISK
+            const diskElement = document.querySelector('#serverStatus .diskUsage, [title*="Disk"]');
+            if (diskElement) {
+                const diskText = diskElement.textContent || diskElement.innerText;
+                const diskMatch = diskText.match(/(\d+)%?/);
+                if (diskMatch) {
+                    const diskValue = parseInt(diskMatch[1]);
+                    const diskEl = document.getElementById('mobileDiskValue');
+                    if (diskEl) {
+                        diskEl.textContent = diskValue + '%';
+                        diskEl.className = 'mobileServerInfoValue ' + (diskValue > 90 ? 'error' : diskValue > 80 ? 'warning' : 'good');
+                    }
+                }
+            }
+            
+            // FPS
+            if (typeof cameras !== 'undefined' && cameras && cameras.allCameras) {
+                let totalFps = 0;
+                let count = 0;
+                for (let camId in cameras.allCameras) {
+                    const cam = cameras.allCameras[camId];
+                    if (cam && cam.fps) {
+                        totalFps += parseFloat(cam.fps) || 0;
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    const avgFps = Math.round(totalFps / count);
+                    const fpsEl = document.getElementById('mobileFpsValue');
+                    if (fpsEl) {
+                        fpsEl.textContent = avgFps;
+                        fpsEl.className = 'mobileServerInfoValue good';
+                    }
+                }
+            }
+        } catch (e) {
+            // Si erreur, ignorer silencieusement
+        }
     }
     
     /**
@@ -229,12 +348,22 @@
                 return;
             }
             
+            // Vérifier qu'une seule caméra est affichée
+            const visibleCameras = document.querySelectorAll('#camimg_wrapper .camimg:not([style*="display: none"])');
+            const isSingleCamera = visibleCameras.length === 1;
+            
+            if (!isSingleCamera) {
+                ptzButton.style.display = 'none';
+                console.log('⚠️ Plusieurs caméras visibles - bouton PTZ masqué');
+                return;
+            }
+            
             // Vérifier si les contrôles PTZ sont visibles/disponibles
             if (ptzControlsBox && !ptzControlsBox.classList.contains('disabled')) {
                 const ptzButtonsMain = ptzControlsBox.querySelector('#ptzButtonsMain');
                 if (ptzButtonsMain && !ptzButtonsMain.classList.contains('disabled')) {
                     ptzButton.style.display = 'flex';
-                    console.log('✅ Caméra PTZ détectée - bouton affiché');
+                    console.log('✅ Caméra PTZ unique détectée - bouton affiché');
                 } else {
                     ptzButton.style.display = 'none';
                     console.log('⚠️ PTZ désactivé - bouton masqué');
@@ -258,6 +387,17 @@
                 attributes: true,
                 attributeFilter: ['class'],
                 subtree: true
+            });
+        }
+        
+        // Observer aussi le conteneur de caméras
+        const camimgWrapper = document.getElementById('camimg_wrapper');
+        if (camimgWrapper) {
+            observer.observe(camimgWrapper, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style', 'class']
             });
         }
         
