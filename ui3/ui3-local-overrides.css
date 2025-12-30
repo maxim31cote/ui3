@@ -1,0 +1,244 @@
+/* UI3 Local Overrides - Material Design 3 Mobile Theme */
+/* Ce fichier est chargé automatiquement par ui3.htm après ui3.css */
+
+/* ============================================
+   MATERIAL DESIGN 3 COLOR SYSTEM
+   ============================================ */
+
+:root {
+  /* Primary colors */
+  --md-sys-color-primary: #6750A4;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+  
+  /* Secondary colors */
+  --md-sys-color-secondary: #625B71;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E8DEF8;
+  --md-sys-color-on-secondary-container: #1D192B;
+  
+  /* Surface colors */
+  --md-sys-color-surface: #1C1B1F;
+  --md-sys-color-on-surface: #E6E1E5;
+  --md-sys-color-surface-variant: #49454F;
+  --md-sys-color-on-surface-variant: #CAC4D0;
+  --md-sys-color-surface-container: #211F26;
+  --md-sys-color-surface-container-high: #2B2930;
+  --md-sys-color-surface-container-highest: #36343B;
+  
+  /* Outline */
+  --md-sys-color-outline: #938F99;
+  --md-sys-color-outline-variant: #49454F;
+  
+  /* Android Design Tokens */
+  --android-elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --android-elevation-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --android-elevation-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  --android-elevation-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  --android-border-radius: 16px;
+  --android-border-radius-large: 28px;
+  --android-transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ============================================
+   SYSTEM STATUS BAR (TOP)
+   ============================================ */
+
+.portrait #system-status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portrait #system-status-bar .status-left,
+.portrait #system-status-bar .status-center,
+.portrait #system-status-bar .status-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.portrait #system-status-bar .status-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.portrait #system-status-bar .status-icon {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* ============================================
+   BOTTOM NAVIGATION
+   ============================================ */
+
+.portrait .mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 9999;
+  padding: 8px 0;
+}
+
+.portrait .mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 4px;
+  background: transparent;
+  border-radius: var(--android-border-radius);
+  border: none;
+  transition: var(--android-transition);
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+  min-height: 64px;
+  position: relative;
+  cursor: pointer;
+}
+
+.portrait .mobile-nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  transition: var(--android-transition);
+  z-index: -1;
+}
+
+.portrait .mobile-nav-item:hover::before,
+.portrait .mobile-nav-item:active::before {
+  background: var(--md-sys-color-secondary-container);
+}
+
+.portrait .mobile-nav-item.active {
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.portrait .mobile-nav-item.active::before {
+  background: var(--md-sys-color-secondary-container);
+}
+
+.portrait .mobile-nav-item svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.portrait .mobile-nav-item span {
+  font-size: 11px;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   ADJUST LAYOUT FOR MOBILE BARS
+   ============================================ */
+
+.portrait #layoutmain {
+  padding-bottom: 88px !important;
+  padding-top: 0 !important;
+}
+
+.portrait #contentWrapper {
+  padding-top: 0 !important;
+}
+
+/* ============================================
+   HIDE DESKTOP ELEMENTS IN PORTRAIT
+   ============================================ */
+
+/* Hide top bar tabs in portrait */
+.portrait #layouttop {
+  display: none !important;
+}
+
+/* Hide Server Status panel completely */
+.portrait #statusArea,
+.portrait .serverStatusLabel,
+.portrait #serverStatus,
+.portrait .serverStatusPanel {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Hide loading wrapper */
+.portrait #loadingmsgwrapper {
+  display: none !important;
+}
+
+/* ============================================
+   MATERIAL DESIGN ENHANCEMENTS
+   ============================================ */
+
+/* Clip tiles as Material cards */
+.portrait .cliptile,
+.portrait .datetile {
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--android-border-radius);
+  box-shadow: var(--android-elevation-1);
+  transition: var(--android-transition);
+  margin: 8px;
+}
+
+.portrait .cliptile:hover,
+.portrait .datetile:hover {
+  box-shadow: var(--android-elevation-2);
+  transform: translateY(-2px);
+}
+
+/* Buttons Material Design style */
+.portrait button,
+.portrait .button {
+  border-radius: var(--android-border-radius);
+  transition: var(--android-transition);
+}
+
+/* Camera tiles */
+.portrait .cameraBox {
+  border-radius: var(--android-border-radius);
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--android-elevation-1);
+}
+
+/* Improve touch targets */
+.portrait button,
+.portrait .clickable {
+  min-height: 48px;
+  min-width: 48px;
+}
