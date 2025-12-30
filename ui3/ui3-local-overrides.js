@@ -25,6 +25,9 @@
         document.body.classList.add('portrait');
         document.documentElement.classList.add('portrait');
         console.log('✅ Classes portrait ajoutées');
+        
+        // Set default view to live
+        document.body.classList.add('liveView');
 
         // Create system status bar
         createSystemStatusBar();
@@ -201,6 +204,16 @@
                 this.classList.add('active');
                 
                 console.log('🔄 Navigation vers:', tabName);
+                
+                // Update body class for view state
+                document.body.classList.remove('liveView', 'clipsView', 'timelineView');
+                if (tabName === 'live') {
+                    document.body.classList.add('liveView');
+                } else if (tabName === 'clips') {
+                    document.body.classList.add('clipsView');
+                } else if (tabName === 'timeline') {
+                    document.body.classList.add('timelineView');
+                }
                 
                 // Click on corresponding UI3 element
                 if (tabName === 'menu') {

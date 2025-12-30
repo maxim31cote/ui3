@@ -245,8 +245,28 @@
   display: none !important;
 }
 
-/* Hide left sidebar completely (PTZ, controls, etc.) */
+/* Hide left sidebar by default, but show for clips/timeline */
 .portrait #layoutleft {
+  display: none !important;
+}
+
+/* Show sidebar in full screen when viewing clips or timeline */
+.portrait body:not(.liveView) #layoutleft {
+  display: block !important;
+  position: fixed !important;
+  top: 28px !important; /* Below status bar */
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 80px !important; /* Above bottom nav */
+  width: 100% !important;
+  height: auto !important;
+  z-index: 9999 !important;
+  background: var(--md-sys-color-surface) !important;
+}
+
+/* Always hide PTZ controls in portrait */
+.portrait #layoutleftPtzControls,
+.portrait .ptzControls {
   display: none !important;
 }
 
@@ -297,7 +317,10 @@
 /* ============================================
    CAMERA GRID - FRIGATE STYLE
    ============================================ */
-
+/* Hide camera grid when viewing clips/timeline */
+.portrait body:not(.liveView) #cameras {
+  display: none !important;
+}
 /* Camera grid container */
 .portrait #cameras {
   display: grid !important;
