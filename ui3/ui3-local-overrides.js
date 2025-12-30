@@ -8,6 +8,8 @@
 
     // Wait for UI3 to be fully initialized
     function initMobileOverrides() {
+        console.log('⏳ Tentative d\'initialisation... ui3:', typeof ui3, 'initialized:', typeof ui3 !== 'undefined' ? ui3.initialized : 'undefined');
+        
         if (typeof ui3 === 'undefined' || !ui3.initialized) {
             setTimeout(initMobileOverrides, 100);
             return;
@@ -250,5 +252,11 @@ console.log('🔨 createGroupSelector appelé');
     } else {
         initMobileOverrides();
     }
+    
+    // Also try after a delay as backup
+    setTimeout(function() {
+        console.log('🔄 Backup init après 2 secondes');
+        initMobileOverrides();
+    }, 2000);
 
 })();
