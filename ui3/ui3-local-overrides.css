@@ -1,421 +1,399 @@
-/* UI3 Local Overrides - Material Design 3 Mobile Theme */
-/* Ce fichier est chargé automatiquement par ui3.htm après ui3.css */
-
 /* ============================================
-   MATERIAL DESIGN 3 COLOR SYSTEM
+   UI3 Mobile Optimizations - Style Frigate
    ============================================ */
 
-:root {
-  /* Primary colors */
-  --md-sys-color-primary: #6750A4;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #EADDFF;
-  --md-sys-color-on-primary-container: #21005D;
-  
-  /* Secondary colors */
-  --md-sys-color-secondary: #625B71;
-  --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #E8DEF8;
-  --md-sys-color-on-secondary-container: #1D192B;
-  
-  /* Surface colors */
-  --md-sys-color-surface: #1C1B1F;
-  --md-sys-color-on-surface: #E6E1E5;
-  --md-sys-color-surface-variant: #49454F;
-  --md-sys-color-on-surface-variant: #CAC4D0;
-  --md-sys-color-surface-container: #211F26;
-  --md-sys-color-surface-container-high: #2B2930;
-  --md-sys-color-surface-container-highest: #36343B;
-  
-  /* Outline */
-  --md-sys-color-outline: #938F99;
-  --md-sys-color-outline-variant: #49454F;
-  
-  /* Android Design Tokens */
-  --android-elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  --android-elevation-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  --android-elevation-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  --android-elevation-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  --android-border-radius: 16px;
-  --android-border-radius-large: 28px;
-  --android-transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
 /* ============================================
-   SYSTEM STATUS BAR (TOP)
+   PORTRAIT MODE - MOBILE OPTIMIZATION
    ============================================ */
 
-/* Apply to portrait mode detected by matchMedia */
-@media (orientation: portrait) {
-  #system-status-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 28px;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(20px);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-
-.portrait #system-status-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.portrait #system-status-bar .status-left,
-.portrait #system-status-bar .status-center,
-.portrait #system-status-bar .status-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.portrait #system-status-bar .status-item {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.portrait #system-status-bar .status-icon {
-  font-size: 10px;
-  opacity: 0.6;
-}
-
-/* ============================================
-   GROUP SELECTOR (Top Right)
-   ============================================ */
-
-.portrait #group-selector {
-  position: fixed;
-  top: 36px;
-  right: 12px;
-  z-index: 9998;
-  background: var(--md-sys-color-surface-container);
-  border-radius: 20px;
-  padding: 8px 12px;
-  box-shadow: var(--android-elevation-2);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--md-sys-color-on-surface);
-  cursor: pointer;
-  border: 1px solid var(--md-sys-color-outline-variant);
-  transition: var(--android-transition);
-}
-
-.portrait #group-selector svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-.portrait #group-selector:active {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  transform: scale(0.95);
-}
-
-/* ============================================
-   BOTTOM NAVIGATION
-   ============================================ */
-
-.portrait .mobile-bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: var(--md-sys-color-surface-container);
-  border-top: 1px solid var(--md-sys-color-outline-variant);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 9999;
-  padding: 8px 0;
-}
-
-.portrait .mobile-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  margin: 0 4px;
-  background: transparent;
-  border-radius: var(--android-border-radius);
-  border: none;
-  transition: var(--android-transition);
-  color: var(--md-sys-color-on-surface-variant);
-  text-decoration: none;
-  min-height: 64px;
-  position: relative;
-  cursor: pointer;
-}
-
-.portrait .mobile-nav-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: transparent;
-  transition: var(--android-transition);
-  z-index: -1;
-}
-
-.portrait .mobile-nav-item:hover::before,
-.portrait .mobile-nav-item:active::before {
-  background: var(--md-sys-color-secondary-container);
-}
-
-.portrait .mobile-nav-item.active {
-  color: var(--md-sys-color-on-secondary-container);
-}
-
-.portrait .mobile-nav-item.active::before {
-  background: var(--md-sys-color-secondary-container);
-}
-
-.portrait .mobile-nav-item svg {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 4px;
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 2;
-}
-
-.portrait .mobile-nav-item span {
-  font-size: 11px;
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* ============================================
-   ADJUST LAYOUT FOR MOBILE BARS
-   ============================================ */
-
-.portrait #layoutmain {
-  padding-bottom: 88px !important;
-  padding-top: 36px !important;
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-}
-
-.portrait #contentWrapper {
-  padding: 8px !important;
-  margin: 0 !important;
-}
-
-/* ============================================
-   HIDE DESKTOP ELEMENTS IN PORTRAIT
-   ============================================ */
-
-/* Hide top bar tabs in portrait */
+/* Masquer la barre supérieure en mode portrait (mobile) */
 .portrait #layouttop {
-  display: none !important;
+	display: none !important;
 }
 
-/* Hide left sidebar by default */
+/* Masquer la sidebar en mode portrait */
 .portrait #layoutleft {
-  display: none !important;
+	display: none !important;
 }
 
-/* In clips view: show cameras on top, recordings list at bottom */
-.portrait body.clipsView #cameras {
-  display: grid !important;
-  position: fixed !important;
-  top: 28px !important; /* Below status bar */
-  left: 0 !important;
-  right: 0 !important;
-  height: 40vh !important; /* Top 40% of screen */
-  z-index: 100 !important;
-  overflow-y: auto !important;
+/* Masquer les contrôles PTZ par défaut en mode portrait */
+.portrait #ptzControlsBox {
+	display: none !important;
 }
 
-.portrait body.clipsView #layoutleftRecordings {
-  display: block !important;
-  position: fixed !important;
-  top: calc(28px + 40vh) !important; /* Below cameras */
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 80px !important; /* Above bottom nav */
-  z-index: 101 !important;
-  background: var(--md-sys-color-surface) !important;
-  overflow-y: auto !important;
-  padding: 8px !important;
-}
-
-/* Hide other layoutleft sections in clips view */
-.portrait body.clipsView #layoutleftLive,
-.portrait body.clipsView #layoutleftExport {
-  display: none !important;
-}
-
-/* Show sidebar in full screen for timeline */
-.portrait body.timelineView #layoutleft {
-  display: block !important;
-  position: fixed !important;
-  top: 28px !important; /* Below status bar */
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 80px !important; /* Above bottom nav */
-  width: 100% !important;
-  height: auto !important;
-  z-index: 9999 !important;
-  background: var(--md-sys-color-surface) !important;
-}
-
-.portrait body.timelineView #cameras {
-  display: none !important;
-}
-
-/* Always hide PTZ controls in portrait */
-.portrait #layoutleftPtzControls,
-.portrait .ptzControls {
-  display: none !important;
-}
-
-/* Hide Server Status panel completely */
-.portrait #statusArea,
-.portrait .serverStatusLabel,
-.portrait #serverStatus,
-.portrait .serverStatusPanel {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Hide loading wrapper */
-.portrait #loadingmsgwrapper {
-  display: none !important;
+/* Le contenu principal prend tout l'espace */
+.portrait #layoutbody {
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 60px !important; /* Espace pour la barre de navigation en bas */
 }
 
 /* ============================================
-   MATERIAL DESIGN ENHANCEMENTS
+   BARRE DE NAVIGATION INFÉRIEURE (MOBILE)
    ============================================ */
 
-/* Recordings list controls */
-.portrait #layoutLeftRecordingsControls {
-  background: var(--md-sys-color-surface-container) !important;
-  padding: 8px !important;
-  border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
+/* Créer une barre de navigation en bas en mode portrait */
+.portrait #layouttop {
+	display: flex !important;
+	position: fixed !important;
+	top: auto !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	height: 60px !important;
+	z-index: 1000 !important;
+	background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%) !important;
+	backdrop-filter: blur(10px) !important;
+	border-top: 1px solid rgba(255,255,255,0.1) !important;
+	box-shadow: 0 -2px 10px rgba(0,0,0,0.3) !important;
+	flex-direction: row !important;
+	justify-content: space-around !important;
+	align-items: center !important;
+	padding: 0 !important;
 }
 
-/* Clip tiles as Material cards */
-.portrait .cliptile,
-.portrait .datetile {
-  background: var(--md-sys-color-surface-container);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--android-border-radius);
-  box-shadow: var(--android-elevation-1);
-  transition: var(--android-transition);
-  margin: 8px;
+/* Cacher le nom du système en mode portrait */
+.portrait #systemnamewrapper {
+	display: none !important;
 }
 
-.portrait .cliptile:hover,
-.portrait .datetile:hover {
-  box-shadow: var(--android-elevation-2);
-  transform: translateY(-2px);
+/* Cacher le gap spacer */
+.portrait #topbar_gap {
+	display: none !important;
 }
 
-/* Buttons Material Design style */
-.portrait button,
-.portrait .button {
-  border-radius: var(--android-border-radius);
-  transition: var(--android-transition);
+/* Cacher les boutons d'icônes de la barre supérieure */
+.portrait .topbar_icon {
+	display: none !important;
+}
+
+/* Style des onglets en mode portrait (Live, Clips, Timeline) */
+.portrait .topbar_tab {
+	flex: 1 1 auto !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	justify-content: center !important;
+	min-width: 0 !important;
+	height: 100% !important;
+	padding: 8px 4px !important;
+	border-radius: 0 !important;
+	border: none !important;
+	background: transparent !important;
+	transition: all 0.2s ease !important;
+}
+
+.portrait .topbar_tab:hover {
+	background: rgba(255,255,255,0.1) !important;
+}
+
+.portrait .topbar_tab.selected {
+	background: rgba(99, 195, 91, 0.2) !important;
+	border-top: 3px solid #63C35B !important;
+}
+
+/* Labels des onglets */
+.portrait .topbar_tab_label {
+	font-size: 11px !important;
+	font-weight: 500 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	margin-top: 4px !important;
+	white-space: nowrap !important;
+}
+
+/* Ajouter des icônes aux onglets via pseudo-elements */
+.portrait #topbar_tab_live::before {
+	content: "●" !important;
+	font-size: 18px !important;
+	display: block !important;
+	color: #63C35B !important;
+}
+
+.portrait #topbar_tab_clips::before {
+	content: "▶" !important;
+	font-size: 16px !important;
+	display: block !important;
+	color: var(--text-color) !important;
+}
+
+.portrait #topbar_tab_timeline::before {
+	content: "━" !important;
+	font-size: 16px !important;
+	display: block !important;
+	color: var(--text-color) !important;
+}
+
+.portrait .topbar_tab.selected::before {
+	color: #63C35B !important;
 }
 
 /* ============================================
-   CAMERA GRID - FRIGATE STYLE
+   BOUTON PTZ FLOTTANT (MOBILE)
    ============================================ */
 
-/* Camera grid container */
-.portrait #cameras {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
-  gap: 8px !important;
-  padding: 8px !important;
-  width: 100% !important;
-  margin: 0 !important;
+/* Créer un bouton PTZ flottant */
+#ptzFloatingButton {
+	display: none; /* Caché par défaut */
+	position: fixed;
+	bottom: 80px;
+	right: 16px;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+	z-index: 999;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	border: 2px solid rgba(255,255,255,0.2);
 }
 
-/* Camera tiles */
+.portrait #ptzFloatingButton {
+	display: flex !important; /* Visible seulement en mode portrait */
+}
+
+#ptzFloatingButton:hover {
+	transform: scale(1.1);
+	box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+}
+
+#ptzFloatingButton:active {
+	transform: scale(0.95);
+}
+
+#ptzFloatingButton svg,
+#ptzFloatingButton .icon {
+	width: 28px;
+	height: 28px;
+	fill: white;
+	filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+/* Panneau PTZ en overlay */
+#ptzOverlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 60px; /* Au-dessus de la barre de navigation */
+	background: rgba(0,0,0,0.85);
+	backdrop-filter: blur(5px);
+	z-index: 998;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+.portrait #ptzOverlay.active {
+	display: flex !important;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Conteneur des contrôles PTZ dans l'overlay */
+#ptzOverlay #ptzControlsBox {
+	display: block !important;
+	background: rgba(20,20,20,0.9);
+	border-radius: 16px;
+	padding: 20px;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+	max-width: 400px;
+	width: 100%;
+}
+
+#ptzOverlay .leftBarHeading {
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 15px;
+	color: #FFFFFF;
+}
+
+/* Bouton de fermeture du panneau PTZ */
+#ptzOverlayClose {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: none;
+	color: white;
+	font-size: 24px;
+	line-height: 1;
+}
+
+#ptzOverlayClose:hover {
+	background: rgba(255,255,255,0.3);
+	transform: rotate(90deg);
+}
+
+/* ============================================
+   AMÉLIORATION DE L'AFFICHAGE DES CAMÉRAS
+   ============================================ */
+
+/* Améliorer l'affichage des vignettes de caméras en mode portrait */
 .portrait .cameraBox {
-  border-radius: 12px !important;
-  background: var(--md-sys-color-surface-container) !important;
-  border: 1px solid var(--md-sys-color-outline-variant) !important;
-  box-shadow: var(--android-elevation-1) !important;
-  overflow: hidden !important;
-  aspect-ratio: 16/9 !important;
-  position: relative !important;
-  margin: 0 !important;
-  padding: 0 !important;
+	border-radius: 8px !important;
+	overflow: hidden !important;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+	margin: 4px !important;
 }
 
-.portrait .cameraBox img,
-.portrait .cameraBox canvas {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
+.portrait .cameraLabel {
+	background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%) !important;
+	padding: 8px 6px 4px 6px !important;
+	font-size: 12px !important;
+	font-weight: 500 !important;
 }
 
-/* Camera labels in overlay */
-.portrait .cameraBox .cameraLabel {
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
-  padding: 8px 6px 4px 6px !important;
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  color: white !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+/* Améliorer les contrôles de lecture en mode portrait */
+.portrait #playbackControls {
+	background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%) !important;
+	backdrop-filter: blur(10px) !important;
+	border-top: 1px solid rgba(255,255,255,0.1) !important;
+	padding: 8px !important;
 }
 
-/* Hide camera numbers/icons cluttering the view */
-.portrait .cameraBox .cameraNumber,
-.portrait .cameraBox .cameraIcon {
-  display: none !important;
+.portrait .pcButton {
+	min-width: 40px !important;
+	min-height: 40px !important;
+	margin: 0 2px !important;
 }
 
-/* Improve touch targets */
+/* ============================================
+   AFFICHAGE DES CLIPS EN MODE PORTRAIT
+   ============================================ */
+
+/* Quand l'onglet Clips est actif, afficher le panneau latéral en overlay */
+.portrait.tabClips #layoutleft,
+.portrait.tabTimeline #layoutleft {
+	display: block !important;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 60px !important; /* Au-dessus de la barre de navigation */
+	z-index: 500 !important;
+	margin: 0 !important;
+	background: rgba(0,0,0,0.98) !important;
+	overflow-y: auto !important;
+}
+
+/* Le corps principal est toujours visible (caméras en arrière-plan) */
+.portrait.tabClips #layoutbody,
+.portrait.tabTimeline #layoutbody {
+	z-index: 1 !important; /* Derrière le panneau des clips */
+}
+
+/* ============================================
+   OPTIMISATIONS SUPPLÉMENTAIRES
+   ============================================ */
+
+/* Améliorer les touch targets */
 .portrait button,
-.portrait .clickable {
-  min-height: 48px;
-  min-width: 48px;
+.portrait .clickable,
+.portrait .dropdownTrigger {
+	min-height: 44px !important;
+	min-width: 44px !important;
+}
+
+/* Optimiser la barre de recherche en mode portrait */
+.portrait #clipFilterSearch {
+	font-size: 16px !important; /* Évite le zoom sur iOS */
+	padding: 10px !important;
+}
+
+/* Améliorer les dropdowns en mode portrait */
+.portrait .dropdownBox {
+	min-height: 44px !important;
+}
+
+/* Masquer les éléments moins importants en mode portrait */
+.portrait #open_all_clips_btn,
+.portrait #open_alerts_canceled_btn,
+.portrait #save_snapshot_btn {
+	display: none !important;
+}
+
+/* Garder seulement les boutons essentiels */
+.portrait #btn_main_menu,
+.portrait #open_alerts_btn,
+.portrait #open_alerts_confirmed_btn {
+	position: fixed !important;
+	top: 16px !important;
+	background: rgba(0,0,0,0.7) !important;
+	backdrop-filter: blur(10px) !important;
+	border-radius: 50% !important;
+	width: 44px !important;
+	height: 44px !important;
+	z-index: 900 !important;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.portrait #btn_main_menu {
+	right: 16px !important;
+}
+
+.portrait #open_alerts_btn {
+	right: 68px !important;
+}
+
+.portrait #open_alerts_confirmed_btn {
+	right: 120px !important;
+}
+
+/* ============================================
+   ANIMATIONS ET TRANSITIONS
+   ============================================ */
+
+.portrait #layoutleft,
+.portrait #ptzOverlay {
+	animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Pour les très petits écrans */
+@media (max-width: 360px) {
+	.portrait .topbar_tab_label {
+		font-size: 10px !important;
+	}
+	
+	.portrait #ptzFloatingButton {
+		width: 48px !important;
+		height: 48px !important;
+		bottom: 72px !important;
+	}
+}
+
+/* Pour les écrans moyens en portrait */
+@media (min-width: 361px) and (max-width: 768px) {
+	.portrait #layoutbody {
+		bottom: 60px !important;
+	}
 }
