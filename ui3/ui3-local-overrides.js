@@ -108,13 +108,13 @@
             recordingEl.textContent = recording > 0 ? recording : '—';
         }
     }
-console.log('🔨 createGroupSelector appelé');
+
+    // Create group selector button (top right)
+    function createGroupSelector() {
+        console.log('🔨 createGroupSelector appelé');
         
         if (document.getElementById('group-selector')) {
             console.log('⚠️ Group selector existe déjà');
-    // Create group selector button (top right)
-    function createGroupSelector() {
-        if (document.getElementById('group-selector')) {
             return; // Already exists
         }
 
@@ -140,16 +140,16 @@ console.log('🔨 createGroupSelector appelé');
                 systemName.click();
             }
         });
-        console.log('🔨 createBottomNavigation appelé');
         
-        if (document.querySelector('.mobile-bottom-nav')) {
-            console.log('⚠️ Bottom nav existe déjà');
         console.log('✅ Sélecteur de groupe créé');
     }
 
     // Create bottom navigation bar
     function createBottomNavigation() {
+        console.log('🔨 createBottomNavigation appelé');
+        
         if (document.querySelector('.mobile-bottom-nav')) {
+            console.log('⚠️ Bottom nav existe déjà');
             return; // Already exists
         }
 
